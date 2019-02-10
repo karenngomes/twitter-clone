@@ -8,9 +8,19 @@ export default class Timeline extends Component {
     newTweet: ""
   };
 
+  handleNewTweet = e => {
+    if (e.keyCode !== 13) return;
+    
+    const content = this.state.newTweet;
+    const author = localStorage.getItem("@GoTwitter:username");
+    
+    console.log(content, author);
+  };
+
   handleInputChange = e => {
     this.setState({ newTweet: e.target.value });
   };
+
   render() {
     const { newTweet } = this.state;
     return (
@@ -20,6 +30,7 @@ export default class Timeline extends Component {
           <textarea
             value={newTweet}
             onChange={this.handleInputChange}
+            onKeyDown={this.handleNewTweet}
             placeholder="O que está acontecendo?"
           />
         </form>
