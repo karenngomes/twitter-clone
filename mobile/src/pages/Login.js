@@ -1,12 +1,33 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {
+  TextInput,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default class Login extends Component {
   render() {
     return (
-      <View styles={styles.container}>
-        <Text styles={styles.content}> Hello World! </Text>
-      </View>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.content}>
+          <View>
+            <Icon name="twitter" size={64} color="#4BB0EE" />
+          </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Nome de usuário"
+            // value=""
+            returnKeyType="send"
+          />
+          <TouchableOpacity onPress={() => {}} style={styles.button}>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
