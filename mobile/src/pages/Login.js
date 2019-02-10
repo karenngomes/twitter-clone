@@ -13,6 +13,14 @@ import Icon from "react-native-vector-icons/FontAwesome";
 export default class Login extends Component {
   state = { username: "" };
 
+  async componentDidMount() {
+    const username = AsyncStorage.getItem("@TwitterMobile:username");
+
+    if (username) {
+      this.props.navigation.navigate("App");
+    }
+  }
+
   handleLogin = async () => {
     const { username } = this.state;
 
@@ -20,7 +28,7 @@ export default class Login extends Component {
 
     await AsyncStorage.setItem("@TwitterMobile:username", username);
 
-    this.props.navigation.navigate("Timeline");
+    this.props.navigation.navigate("App");
   };
 
   handleInputChange = username => {
