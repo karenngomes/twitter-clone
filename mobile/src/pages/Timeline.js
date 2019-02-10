@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import api from "../services/api";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Tweet from "../components/Tweet";
 
 export default class Timeline extends Component {
   static navigationOptions = {
@@ -32,9 +39,11 @@ export default class Timeline extends Component {
 
     return (
       <View style={styles.container}>
-        {tweets.map(tweet => (
-          <Text>{tweet.author}</Text>
-        ))}
+        <FlatList
+          data={tweets}
+          keyExtractor={tweet => tweet._id}
+          renderItem={({ item }) => <Tweet tweet={item} />}
+        />
       </View>
     );
   }
