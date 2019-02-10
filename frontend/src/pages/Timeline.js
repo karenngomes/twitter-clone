@@ -6,15 +6,22 @@ import "./Timeline.css";
 
 export default class Timeline extends Component {
   state = {
+    tweets: [],
     newTweet: ""
   };
+
+  async componentDidMount() {
+    const response = await api.get("tweets");
+
+    this.setState({ tweets: response.data });
+  }
 
   handleNewTweet = async e => {
     if (e.keyCode !== 13) return;
 
     const content = this.state.newTweet;
     const author = localStorage.getItem("@GoTwitter:username");
-    
+
     await api.post("tweets", { content, author });
 
     this.setState({ newTweet: "" });
@@ -25,7 +32,7 @@ export default class Timeline extends Component {
   };
 
   render() {
-    const { newTweet } = this.state;
+    const { tweets, newTweet } = this.state;
     return (
       <div className="timeline-wrapper">
         <img height={24} src={twitterLogo} alt="Twitter Logo" />
@@ -37,6 +44,9 @@ export default class Timeline extends Component {
             placeholder="O que está acontecendo?"
           />
         </form>
+        {tweets.map((tweet, i) => (
+          <h1 key={i}>{tweet.content}</h1>
+        ))}
       </div>
     );
   }
