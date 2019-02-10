@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 export default class New extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   render() {
     return (
       <View style={styles.container}>
